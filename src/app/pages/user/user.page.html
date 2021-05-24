@@ -18,25 +18,27 @@
         <ion-label position="floating">Username</ion-label>
         <ion-input formControlName="username" type="text" required></ion-input>
       </ion-item>
-  
+
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email" type="text" required>
         </ion-input>
       </ion-item>
-  
+
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input formControlName="password" type="password" required>
         </ion-input>
       </ion-item>
-  
+
       <ion-row>
         <ion-col>
           <button type="submit" mdc-button raised style="width:100%">Ajouter User</button>
         </ion-col>
       </ion-row>
     </form>
+  </ion-list>
+  <ion-list>
     <div *ngIf="users.length; else spinner">
       <ion-item lines="inset" *ngFor="let elt of users">
         <ion-label>

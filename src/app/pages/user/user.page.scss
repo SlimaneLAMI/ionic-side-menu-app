@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 250px;
+    padding-top: 50px;
 }
 
 .titreUser{
@@ -11,8 +11,8 @@
 
 .iconAddUser{
     padding-right: 10px;
-    margin-top: 6px;
-    font-size: 2em;
+    margin-top: 3px;
+    font-size: 28px;
 }
 
 .close{
@@ -20,7 +20,6 @@
 }
 
 .addUser{    
-    // height: 214px;
-    height: 14em;
+    height: 214px;
     transition: 0.3s;
 }
