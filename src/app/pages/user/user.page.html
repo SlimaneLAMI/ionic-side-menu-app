@@ -8,46 +8,53 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list lines="full">
-    <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+  <ion-list>
+    <ion-list-header>
+      <h4 class="titreUser">La liste des users</h4>
+      <ion-icon name="person-add" class="iconAddUser" (click)="afficherAdd()"></ion-icon>
+    </ion-list-header>
+    <form class="addUser" [class.close]="hide" [formGroup]="userForm" (ngSubmit)="saveUser()">
       <ion-item>
         <ion-label position="floating">Username</ion-label>
         <ion-input formControlName="username" type="text" required></ion-input>
       </ion-item>
-
+  
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email" type="text" required>
         </ion-input>
       </ion-item>
-
+  
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input formControlName="password" type="password" required>
         </ion-input>
       </ion-item>
-
+  
       <ion-row>
         <ion-col>
           <button type="submit" mdc-button raised style="width:100%">Ajouter User</button>
         </ion-col>
       </ion-row>
     </form>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <h4>La liste des users</h4>
-    </ion-list-header>
-    <ion-item lines="inset" *ngFor="let elt of users">
-      <ion-label>
-        <p>{{ elt.id }}</p>
-        <p>{{ elt.username }}</p>
-        <p>{{ elt.email }}</p>
-      </ion-label>
-      <div>
-        <ion-icon name="create" style="zoom:1.6" [routerLink]="['/user-details/', elt.id]"></ion-icon>
-        <ion-icon name="trash" style="zoom:1.6" (click)="delUser(elt.id)"></ion-icon>
-      </div>
-    </ion-item>
+    <div *ngIf="users.length; else spinner">
+      <ion-item lines="inset" *ngFor="let elt of users">
+        <ion-label>
+          <p>{{ elt.id }}</p>
+          <p>{{ elt.username }}</p>
+          <p>{{ elt.email }}</p>
+        </ion-label>
+        <div>
+          <ion-icon name="create" style="zoom:1.6" [routerLink]="['/user-details/', elt.id]"></ion-icon>
+          <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+        </div>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
+
+<ng-template #spinner>
+  <div id="spinner">
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+</ng-template>

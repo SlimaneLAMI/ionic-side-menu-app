@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -10,8 +10,11 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage implements OnInit {
+
+  hide = true;
   
   users: Array<User> = new Array<User>();
+  // users: User[] = [];
 
   userForm = this.formBuilder.group({
     id: [null],
@@ -20,7 +23,12 @@ export class UserPage implements OnInit {
     password: ['']
   })
 
-  constructor(private userService: UserService, private toast: ToastController, private formBuilder: FormBuilder) { }
+  constructor(
+    private userService: UserService, 
+    private toast: ToastController, 
+    private formBuilder: FormBuilder, 
+    private alertController : AlertController
+    ) { }
 
   ngOnInit(): void {    
     this.reloadData();
@@ -52,7 +60,34 @@ export class UserPage implements OnInit {
       });
       toast.present();
       this.reloadData();
-    })
+      this.userForm.reset();
+      this.afficherAdd();
+    })    
+  }
+
+  async handleButtonClick(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Suppression',
+      message: 'Etes-vous sûr de supprimer ce user ?',
+      buttons: [
+        {
+          text: 'Non',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Oui',
+          cssClass: 'secondary',
+          handler: () => {
+            this.delUser(id)
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  afficherAdd(){
+    this.hide = !this.hide; 
   }
   
 }

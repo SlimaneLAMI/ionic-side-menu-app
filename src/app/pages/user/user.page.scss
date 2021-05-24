@@ -1,0 +1,26 @@
+#spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 250px;
+}
+
+.titreUser{
+    flex: 1 1 auto;
+}
+
+.iconAddUser{
+    padding-right: 10px;
+    margin-top: 6px;
+    font-size: 2em;
+}
+
+.close{
+    height: 0 !important;
+}
+
+.addUser{    
+    // height: 214px;
+    height: 14em;
+    transition: 0.3s;
+}
